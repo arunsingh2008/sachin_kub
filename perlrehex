@@ -1,0 +1,29 @@
+To create a Perl regular expression that matches the given criteria, you can use the following pattern:
+
+perl
+
+
+
+/^tomUrn": "uk-(?!.*-cjm-)\w+-\d{2}-\d{6}$/
+This regular expression will match the strings between the left and right boundaries while excluding the ones with 'cjm' in between.
+
+Here's a breakdown of the pattern:
+
+^tomUrn": "uk- - Matches the beginning of the string, followed by the literal characters "tomUrn": "uk-
+(?!.*-cjm-) - A negative lookahead assertion that ensures 'cjm' is not present between the boundaries.
+\w+ - Matches one or more word characters (letters, digits, or underscores).
+- - Matches the literal hyphen character.
+\d{2} - Matches exactly two digits.
+- - Matches the literal hyphen character.
+\d{6} - Matches exactly six digits.
+$ - Matches the end of the string.
+To return None if 'cjm' is found, you can use the following Perl code:
+
+perl
+
+
+
+my $input = "tomUrn": "uk-cjm-18-000029";
+my $output = (my @matched_parts = $input =~ /^tomUrn": "uk-(?!.*-cjm-)\w+-\d{2}-\d{6}$/) ? $matched_parts[0] : undef;
+print $output; # Output: None
+This code will return None if 'cjm' is found between the boundaries.
